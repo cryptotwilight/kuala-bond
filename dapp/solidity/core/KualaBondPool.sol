@@ -66,10 +66,10 @@ contract KualaBondPool is IKualaBondPool, IVersion {
     mapping(address=>mapping(uint256=>bool)) knownBondByBondContract;
 
 
-    constructor(address _register, uint256 _chainId){
+    constructor(address _register, uint256 _chainId, string memory _poolTokenSymbol, string memory _rewardTokenSymbol){
         register    = IOpsRegister(_register);
-        erc20       = getERC20(register.getAddress("KB_POOL_TOKEN")); 
-        rewardERC20 = getERC20(register.getAddress("KB_POOL_REWARD_TOKEN"));
+        erc20       = getERC20(register.getAddress(_poolTokenSymbol")); 
+        rewardERC20 = getERC20(register.getAddress(_rewardTokenSymbol));
         self        = address(this);
         chain       = _chainId;
     }
