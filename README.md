@@ -19,16 +19,16 @@ The project is deployed on
 
 |Chain |Chain Id| Contract | Address | Verification |Description | 
 |------|--------|----------|---------|--------------|------------|
-|Scroll| 534351 |Kuala Bond Test Token|0xd2365C8E4C3548ddd02184bac8b236408b47391a|              |This is the liquidity token for the kuala bond pool |
-|Scroll| 534351 |Kuala Bond Test Reward Token|0x479fA5A325774dED40e56351F681988Dc6165B36|              |This is the reward token for Kuala Bond pool liquidity providers |
-|Scroll| 534351 |Ops Register|0x38872A6AfD9a2Ea0d027920679F8110f0155d1fC|              |This is the dApp operational register for main  |
-|Scroll| 534351 |Kuala Bond Pool|0x37763B7bC86E683B0E134Ce39bF2A160894Fddc2|              |This is the Kuala Bond Pool that accepts Kuala Bonds against currencies like APE and sDAI in exchange for loands of Kuala Bond Tokens|
-|Scroll| 534351 |KB Routing Registry|0xa07DF0c10415086600CE581363AEBDe715734edF|              | |
-|Scroll| 534351 |KB Synthetic Factory|0xa7898B80483d3E942ec30A1F68Dca600AF790af3|              | |
-|Scroll| 534351 |Kuala Bond Contract |0xE6f3C737081Df078BbDD1cEE921802264b04b39f|              | This is the Kuala Bond Contract for Kuala Bond Token bonds
-|Scroll| 534351 |Kuala Bond Vault|0xF3aA1be10644577655584108e16441379d2c517D|            |#
-|Scroll| 534351 |          |         |              |#
-|Scroll| 534351 |          |         |              |
-|Scroll| 534351 |          |         |              |
+|Scroll Sepolia Testnet| 534351 |Kuala Bond Test Token|0xd2365C8E4C3548ddd02184bac8b236408b47391a|              |This is the liquidity token for the kuala bond pool |
+|Scroll Sepolia Testnet| 534351 |Kuala Bond Test Reward Token|0x479fA5A325774dED40e56351F681988Dc6165B36|              |This is the reward token for Kuala Bond pool liquidity providers |
+|Scroll Sepolia Testnet| 534351 |Ops Register|0x38872A6AfD9a2Ea0d027920679F8110f0155d1fC|              |This is the dApp operational register for main  |
+|Scroll Sepolia Testnet| 534351 |Kuala Bond Pool|0x37763B7bC86E683B0E134Ce39bF2A160894Fddc2|              |This is the Kuala Bond Pool that accepts Kuala Bonds against currencies like APE and sDAI in exchange for loands of Kuala Bond Tokens|
+|Scroll Sepolia Testnet| 534351 |KB Routing Registry|0xa07DF0c10415086600CE581363AEBDe715734edF|              | |
+|Scroll Sepolia Testnet| 534351 |KB Synthetic Factory|0xa7898B80483d3E942ec30A1F68Dca600AF790af3|              | |
+|Scroll Sepolia Testnet| 534351 |Kuala Bond Contract |0xE6f3C737081Df078BbDD1cEE921802264b04b39f|              | This is the Kuala Bond Contract for Kuala Bond Token bonds
+|Scroll Sepolia Testnet| 534351 |Kuala Bond Vault|0xF3aA1be10644577655584108e16441379d2c517D|            |This is the Vault where teleported bonds are commited|
+|Scroll Sepolia Testnet| 534351 |Kuala Bond Register|0x7F39aCc609B4d459821f07142d165a454D6b6637|              |This is the register for all Kuala Bonds on the local chain, only Registered Kuala Bonds can be teleported|
+|Scroll Sepolia Testnet| 534351 |Kuala Bond Teleporter|0xABBD4228Fd397946E08656f05B3A83f8C37323f7|              |This is the teleporter that moves Kuala Bonds between chains using the Axelar protocol
+|Scroll Sepolia Testnet| 534351 |Kuala Bond Recciever |0x40B3EE902182b830a12Ebd7FAAe8Bc680B751269|              |This is the teleport reciever that recieves transmitted Kuala Bonds and materialises them on chain
 |Scroll| 534351 |          |         |              |
 |Scroll| 534351 |          |         |              |x

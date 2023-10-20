@@ -4,7 +4,7 @@ pragma solidity ^0.8.20;
 struct Mint {
     uint256 id; 
     uint256 amount; 
-    uint256 sentTo; 
+    address sentTo; 
     uint256 mintDate; 
 }
 
