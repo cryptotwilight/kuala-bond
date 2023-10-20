@@ -19,8 +19,8 @@ The project is deployed on
 
 |Chain |Chain Id| Contract | Address | Verification |Description | 
 |------|--------|----------|---------|--------------|------------|
-|Scroll Sepolia Testnet| 534351 |Kuala Bond Test Token|0xd2365C8E4C3548ddd02184bac8b236408b47391a|              |This is the liquidity token for the kuala bond pool |
-|Scroll Sepolia Testnet| 534351 |Kuala Bond Test Reward Token|0x479fA5A325774dED40e56351F681988Dc6165B36|              |This is the reward token for Kuala Bond pool liquidity providers |
+|Scroll Sepolia Testnet| 534351 |Kuala Bond Test Token|0xd2365C8E4C3548ddd02184bac8b236408b47391a|[https://sepolia.scrollscan.dev/address/0xd2365C8E4C3548ddd02184bac8b236408b47391a#code](https://sepolia.scrollscan.dev/address/0xd2365C8E4C3548ddd02184bac8b236408b47391a#code)|This is the liquidity token for the kuala bond pool |
+|Scroll Sepolia Testnet| 534351 |Kuala Bond Test Reward Token|0x479fA5A325774dED40e56351F681988Dc6165B36|[https://sepolia.scrollscan.dev/address/0x38872A6AfD9a2Ea0d027920679F8110f0155d1fC#code](https://sepolia.scrollscan.dev/address/0x38872A6AfD9a2Ea0d027920679F8110f0155d1fC#code)              |This is the reward token for Kuala Bond pool liquidity providers |
 |Scroll Sepolia Testnet| 534351 |Ops Register|0x38872A6AfD9a2Ea0d027920679F8110f0155d1fC|              |This is the dApp operational register for main  |
 |Scroll Sepolia Testnet| 534351 |Kuala Bond Pool|0x37763B7bC86E683B0E134Ce39bF2A160894Fddc2|              |This is the Kuala Bond Pool that accepts Kuala Bonds against currencies like APE and sDAI in exchange for loands of Kuala Bond Tokens|
 |Scroll Sepolia Testnet| 534351 |KB Routing Registry|0xa07DF0c10415086600CE581363AEBDe715734edF|              | |
