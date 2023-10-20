@@ -13,10 +13,10 @@ Kuala Bonds work by using a Kuala Bond Contract that works with NFT mechanics. T
 ## Deployments
 The following are the chain deployments for the project 
 The project is deployed on 
--> Scroll Sepolia Testnet
--> FVM Testnet
--> Polygon Testnet 
-->
+- Scroll Sepolia Testnet
+- FVM Testnet
+- Polygon Testnet 
+
 |Chain |Chain Id| Contract | Address | Verification |Description | 
 |------|--------|----------|---------|--------------|------------|
 |Scroll| 534351 |Kuala Bond Test Token|0xd2365C8E4C3548ddd02184bac8b236408b47391a|              |This is the liquidity token for the kuala bond pool |
