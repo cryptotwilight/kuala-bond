@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import {ERC20, KualaBond, RegisteredKualaBond} from "./IKualaBondStructs.sol";
+import {ERC20, KualaBond, RegisteredKualaBond, BondStatus} from "./IKualaBondStructs.sol";
 
 struct KualaBondVerification { 
     uint256 id; 
@@ -32,7 +32,6 @@ interface IKualaBondRegister {
 
     function getKualaBondRegistrationIds() view external returns (uint256 [] memory _registrationIds);
 
-
     function getKualaBondRegistration(address _kualaBondContract) view external returns (KualaBondContractRegistration memory _kualaBondRegistration);
 
     function findBondContracts(address _erc20, uint256 _srcChain) view external returns (address [] memory kualaBondContracts);
@@ -56,5 +55,6 @@ interface IKualaBondRegister {
 
     function getVerification(uint256 _verficiationId) view external returns (KualaBondVerification memory _kualaBondVerification);
 
+    function updateStatus(uint256 _registrationId, BondStatus _status) external returns (RegisteredKualaBond memory _kualaBond);
 
 }

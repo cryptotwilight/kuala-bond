@@ -12,7 +12,7 @@ interface IKualaBondSyntheticContract is IKualaBondContract {
 
     function isVerifiedSettlement(Settlement memory _settlement) view external returns (bool _isVerified);
 
-    function reIssueKualaBond(KualaBond memory _srcBond) external returns (KualaBond memory _reBond);
+    function reIssueKualaBond(KualaBond memory _srcBond, uint256 _vaultId) external returns (KualaBond memory _reBond);
      
     function settleKualaBond(uint256 _reBondId) external returns (Settlement memory settlement);
 

@@ -7,29 +7,36 @@ import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 
 import "../interfaces/IVersion.sol";
-import {BondType} from "../interfaces/IKualaBondStructs.sol";
+import {BondType, BondStatus} from "../interfaces/IKualaBondStructs.sol";
 import "../interfaces/IKualaBondSyntheticContract.sol";
+import "../interfaces/IOpsRegister.sol";
 
 contract KualaBondSyntheticContract is ERC721, ERC721Burnable, IKualaBondSyntheticContract, IVersion { 
 
     string constant vname = "KUALA_BOND_SYNTHETIC_CONTRACT";
-    uint256 constant version = 1; 
+    uint256 constant version = 2; 
+
+    string constant KUALA_BOND_RECIEVER_CA = "KUALA_BOND_RECIEVER";
+    string constant KUALA_BOND_ADMINISTRATOR_CA = "KUALA_BOND_ADMIN";
+
 
     uint256 index; 
 
-    address administrator; 
     address self; 
+
+    IOpsRegister register; 
 
     BondConfiguration bondConfiguration;
     mapping(uint256=>KualaBond) bondById;
     mapping(uint256=>uint256) sourceBondIdByReBondId; 
     mapping(uint256=>KualaBond) sourceBondById; 
     mapping(uint256=>mapping(address=>mapping(uint256=>bool))) existsBondTypeByBondIdByBondContractByChainId; 
+    mapping(uint256=>uint256) vaultIdByBondId; 
 
     mapping(uint256=>Settlement) settlementById; 
 
-    constructor(string memory _name, string memory _symbol, address _admin, BondConfiguration memory _bondConfiguration) ERC721(_name, _symbol) {
-        administrator = _admin; 
+    constructor(string memory _name, string memory _symbol, address _register, BondConfiguration memory _bondConfiguration) ERC721(_name, _symbol) {
+        register = IOpsRegister(_register);
         bondConfiguration = _bondConfiguration; 
         self = address(this);
     }
@@ -58,9 +65,10 @@ contract KualaBondSyntheticContract is ERC721, ERC721Burnable, IKualaBondSynthet
         
     }
 
-    function reIssueKualaBond(KualaBond memory _srcBond) external returns (KualaBond memory _reBond){
+    function reIssueKualaBond(KualaBond memory _srcBond, uint256 _vaultId) external returns (KualaBond memory _reBond){
+        require(msg.sender == register.getAddress(KUALA_BOND_RECIEVER_CA) || 
+                msg.sender == register.getAddress(KUALA_BOND_ADMINISTRATOR_CA), "kuala bond reciever only");
         require(!existsBondTypeByBondIdByBondContractByChainId[_srcBond.sourceChain][_srcBond.bondContract][_srcBond.id], "bond already re-issued");
-        require(verifyBond(_srcBond), "unable to verify source bond");
         existsBondTypeByBondIdByBondContractByChainId[_srcBond.sourceChain][_srcBond.bondContract][_srcBond.id] = true; 
         _reBond = KualaBond({
                                 id : getIndex(), 
@@ -69,11 +77,13 @@ contract KualaBondSyntheticContract is ERC721, ERC721Burnable, IKualaBondSynthet
                                 sourceChain : bondConfiguration.chainId, 
                                 createDate : block.timestamp, 
                                 bondContract : self,  
-                                amount : _srcBond.amount
+                                amount : _srcBond.amount,
+                                status : BondStatus.ISSUED
                             });
         existsBondTypeByBondIdByBondContractByChainId[_reBond.sourceChain][_reBond.bondContract][_reBond.id] = true;
         bondById[_reBond.id] = _reBond; 
         sourceBondById[_srcBond.id] = _srcBond;
+        vaultIdByBondId[_srcBond.id] = _vaultId; 
          _mint(msg.sender, _reBond.id);
         return _reBond; 
     }
@@ -84,16 +94,12 @@ contract KualaBondSyntheticContract is ERC721, ERC721Burnable, IKualaBondSynthet
 
     function settleKualaBond(uint256 _reBondId) external returns (Settlement memory _settlement){
         // resolve to NATURAL bond or Collateral 
+        // burn the bond and create a settlement 
         
     }
 
     // ========================================== INTERNAL =============================================================
-    function verifyBond(KualaBond memory _bond) internal returns (bool _verified) {
-        // go back cross chain and verifify that this bond is Kosher
-    
 
-        return true; 
-    }
 
 
     function getIndex() internal returns (uint256 _index) {

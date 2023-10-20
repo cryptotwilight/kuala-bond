@@ -6,11 +6,17 @@ import "../interfaces/IKualaBondRegister.sol";
 import "../interfaces/IKualaBondStructs.sol";
 import "../interfaces/IVersion.sol";
 import "../interfaces/IKualaBondContract.sol";
+import "../interfaces/IOpsRegister.sol";
 
 contract KualaBondRegister is IKualaBondRegister, IVersion { 
 
     string constant name  = " KUALA_BOND_REGISTER";
-    uint256 constant version = 1; 
+    uint256 constant version = 2; 
+
+    string constant KUALA_BOND_TELEPORTER_CA = "KUALA_BOND_TELEPORTER";
+    string constant KUALA_BOND_ADMIN_CA = "KUALA_BOND_ADMIN";
+
+    IOpsRegister register; 
 
     address admin; 
     address self; 
@@ -35,8 +41,8 @@ contract KualaBondRegister is IKualaBondRegister, IVersion {
     mapping(uint256=>KualaBondContractDeRegistration) kualaBondContractDeregistrationById;
 
 
-    constructor(address _admin, uint256 _chainId) { 
-        admin = _admin; 
+    constructor(address _register, uint256 _chainId) { 
+        register = IOpsRegister(_register);
         chainId = _chainId; 
         self    = address(this);
     }
@@ -88,7 +94,6 @@ contract KualaBondRegister is IKualaBondRegister, IVersion {
         hasKualaBondByBondContractByChainId[_kualaBond.sourceChain][_kualaBond.bondContract][_kualaBond.id] = true; 
         kualaBondByIdByBondContractByChainId[_kualaBond.sourceChain][_kualaBond.bondContract][_kualaBond.id] = _kualaBond; 
         return _rBond; 
-
     }
 
     function getVerification(uint256 _verificiationId) view external returns (KualaBondVerification memory _kualaBondVerification){
@@ -129,7 +134,7 @@ contract KualaBondRegister is IKualaBondRegister, IVersion {
     function deregisterBondContract(uint256 _registrationId) external returns (uint256 _deRegistrationId){
         require(isKnownKualaBondRegistrationId[_registrationId], "unknown registration id");
         KualaBondContractRegistration memory kualaBondContractRegistration_ = kualaBondContractRegistrationById[_registrationId];
-        require(kualaBondContractRegistration_.registra == msg.sender || admin == msg.sender, "registrar or admin only");
+        require(kualaBondContractRegistration_.registra == msg.sender || register.getAddress(KUALA_BOND_ADMIN_CA) == msg.sender, "registrar or admin only");
         isDeregisteredKualaBondContract[ kualaBondContractRegistration_.kualaBondContract] = true; 
         _deRegistrationId = getIndex(); 
         kualaBondContractDeregistrationById[_deRegistrationId] = KualaBondContractDeRegistration({ 
@@ -141,7 +146,14 @@ contract KualaBondRegister is IKualaBondRegister, IVersion {
         return _deRegistrationId; 
     }
 
+    function updateStatus(uint256 _registrationId, BondStatus _status) external returns (RegisteredKualaBond memory _kualaBond){
+        require(msg.sender == register.getAddress(KUALA_BOND_TELEPORTER_CA) 
+            || register.getAddress(KUALA_BOND_ADMIN_CA) == msg.sender, "authorised only" );
+        registeredKualaBondById[_registrationId].bond.status = _status; 
 
+        return  registeredKualaBondById[_registrationId];
+    }
+    
     // =============================== INTERNAL =================================================
 
     function verifyBond(KualaBond memory _kualaBond) internal returns (KualaBondVerification memory _kualaBondVerification){

@@ -19,7 +19,7 @@ contract KualaBondPool is IKualaBondPool, IVersion {
     using Math for uint256; 
 
     string constant name = "KUALA_BOND_POOL";
-    uint256 constant version = 4; 
+    uint256 constant version = 6; 
 
     address constant NATIVE = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
 
@@ -68,7 +68,7 @@ contract KualaBondPool is IKualaBondPool, IVersion {
 
     constructor(address _register, uint256 _chainId, string memory _poolTokenSymbol, string memory _rewardTokenSymbol){
         register    = IOpsRegister(_register);
-        erc20       = getERC20(register.getAddress(_poolTokenSymbol")); 
+        erc20       = getERC20(register.getAddress(_poolTokenSymbol)); 
         rewardERC20 = getERC20(register.getAddress(_rewardTokenSymbol));
         self        = address(this);
         chain       = _chainId;
@@ -247,10 +247,6 @@ contract KualaBondPool is IKualaBondPool, IVersion {
         return getBorrowChargeInternal(_borrowId);
     }
 
-
-
-
-
     function getRewards() view external returns (uint256 _totalCurrentRewards){
         require(hasPoolAccount[msg.sender], "no account");
         PoolAccount memory account_ = poolAccountByAddress[msg.sender];
@@ -268,6 +264,7 @@ contract KualaBondPool is IKualaBondPool, IVersion {
         if(lp_.isPulled){
             lp_.allRewardsIssued = true; 
         }
+        lp_.lastRewardDrawdownDate = block.timestamp;
         transferRewards(msg.sender, rewards_);
         rewardWithdrawalById[_rewardWithdrawalId] =  RewardWithdrawal({ 
                                                                         id : _rewardWithdrawalId,
@@ -401,6 +398,9 @@ contract KualaBondPool is IKualaBondPool, IVersion {
         }
         uint256 end_ = (lp_.isPulled? lp_.liquidityPullDate : block.timestamp);
         uint256 start_ = (lp_.lastRewardDrawdownDate == 0)?lp_.pushDate : lp_.lastRewardDrawdownDate;
+        if(end_ < start_){
+            return 0; // rewards were drawn down after iiquidity pulled
+        }
         return calculateIssue(start_, end_, lp_.amount, rewardFactorNumerator, rewardFactorDenominator); 
     }
 

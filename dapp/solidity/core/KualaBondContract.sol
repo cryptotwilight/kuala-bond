@@ -7,13 +7,13 @@ import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 
 import "../interfaces/IKualaBondContract.sol";
-import {BondConfiguration, BondType} from "../interfaces/IKualaBondStructs.sol";
+import {BondConfiguration, BondType, BondStatus} from "../interfaces/IKualaBondStructs.sol";
 import "../interfaces/IVersion.sol";
 
 contract KualaBondContract is ERC721,ERC721Burnable, IKualaBondContract, IVersion {
     
-    string constant vName = "Kuala Bond Contract";
-    uint256 constant vVersion = 4; 
+    string constant vName = "KUALA_BOND_CONTRACT";
+    uint256 constant vVersion = 5; 
 
     uint256 [] issuedBonds; 
 
@@ -50,6 +50,7 @@ contract KualaBondContract is ERC721,ERC721Burnable, IKualaBondContract, IVersio
 
     function issueKualaBond(uint256 _amount) external payable returns (KualaBond memory _bond){
         // mint
+        require(msg.value == 0, "native token not supported");
         IERC20 erc20 = IERC20(bondConfiguration.erc20.token);
         erc20.transferFrom(msg.sender, self, _amount);
         _bond = KualaBond ({
@@ -59,7 +60,8 @@ contract KualaBondContract is ERC721,ERC721Burnable, IKualaBondContract, IVersio
                                 sourceChain : bondConfiguration.chainId, 
                                 createDate : block.timestamp, 
                                 bondContract : self,
-                                amount : _amount 
+                                amount : _amount,
+                                status : BondStatus.ISSUED
                             });
         kBondById[_bond.id] = _bond;
         issuedBonds.push(_bond.id);
@@ -71,9 +73,8 @@ contract KualaBondContract is ERC721,ERC721Burnable, IKualaBondContract, IVersio
     function liquidateKualaBond(uint256 _bondId) external returns (uint256 _payoutAmount){
         // burn
         require(ownerOf(_bondId) == msg.sender, "owner mis-match");
-        delete knownBondId[_bondId];
         KualaBond memory bond_ = kBondById[_bondId];
-        delete kBondById[bond_.id];
+        kBondById[bond_.id].status = BondStatus.SETTLED;
         _burn(_bondId);
         IERC20 erc20 = IERC20(bondConfiguration.erc20.token);
         erc20.transferFrom(self, msg.sender, bond_.amount);

@@ -9,6 +9,7 @@ struct ERC20 {
 }
 
 enum BondType {NATURAL, SYNTHETIC}
+enum BondStatus {ISSUED, TELEPORTED, SETTLED}
 
 struct KualaBond {
     uint256 id; 
@@ -18,6 +19,7 @@ struct KualaBond {
     uint256 createDate; 
     address bondContract; 
     uint256 amount; // numerical quanity of currency NOT value
+    BondStatus status; 
 }
 
 struct RegisteredKualaBond { 
@@ -42,7 +44,10 @@ struct Settlement {
     address beneficiary; 
     uint256 bondId; 
     uint256 amount; 
+    uint256 vaultId; 
 }
+
+enum TeleportAction {MATERIALIZE, SETTLE}
 
 interface IKualaBondStructs { 
 
