@@ -30,10 +30,13 @@ The project is deployed on
 
 - Scroll Sepolia Testnet
 
+- Mantle Testnet
+
 - FVM Testnet
 
 - Polygon Testnet
 
+- Goerli Testnet
   
 
 |Chain |Chain Id| Contract | Address | Verification |Description |
@@ -46,6 +49,6 @@ The project is deployed on
 |Scroll Sepolia Testnet| 534351 |KB Synthetic Factory|0xa7898B80483d3E942ec30A1F68Dca600AF790af3|[https://sepolia.scrollscan.dev/address/0xa7898B80483d3E942ec30A1F68Dca600AF790af3#code](https://sepolia.scrollscan.dev/address/0xa7898B80483d3E942ec30A1F68Dca600AF790af3#code)|Synthetic Bond contract creation |
 |Scroll Sepolia Testnet| 534351 |Kuala Bond Contract |0xE6f3C737081Df078BbDD1cEE921802264b04b39f|[https://sepolia.scrollscan.dev/address/0xE6f3C737081Df078BbDD1cEE921802264b04b39f#code](https://sepolia.scrollscan.dev/address/0xE6f3C737081Df078BbDD1cEE921802264b04b39f#code) | This is the Kuala Bond Contract for Kuala Bond Token bonds|
 |Scroll Sepolia Testnet| 534351 |Kuala Bond Vault|0xF3aA1be10644577655584108e16441379d2c517D|[https://sepolia.scrollscan.dev/address/0xF3aA1be10644577655584108e16441379d2c517D#code](https://sepolia.scrollscan.dev/address/0xF3aA1be10644577655584108e16441379d2c517D#code)| This is the Vault where teleported bonds are commited|
-|Scroll Sepolia Testnet| 534351 |Kuala Bond Register|0x7F39aCc609B4d459821f07142d165a454D6b6637|[]() | This is the register for all Kuala Bonds on the local chain, only Registered Kuala Bonds can be teleported|
-|Scroll Sepolia Testnet| 534351 |Kuala Bond Teleporter|0xABBD4228Fd397946E08656f05B3A83f8C37323f7| | This is the teleporter that moves Kuala Bonds between chains using the Axelar protocol|
-|Scroll Sepolia Testnet| 534351 |Kuala Bond Reciever |0x40B3EE902182b830a12Ebd7FAAe8Bc680B751269| | This is the teleport reciever that recieves transmitted Kuala Bonds and materialises them on chain|
+|Scroll Sepolia Testnet| 534351 |Kuala Bond Register|0x5A12cb20c413aD0d73E62E8496B6fA166EeC4511|[https://sepolia.scrollscan.dev/address/0x5A12cb20c413aD0d73E62E8496B6fA166EeC4511#code](https://sepolia.scrollscan.dev/address/0x5A12cb20c413aD0d73E62E8496B6fA166EeC4511#code) | This is the register for all Kuala Bonds on the local chain, only Registered Kuala Bonds can be teleported|
+|Scroll Sepolia Testnet| 534351 |Kuala Bond Teleporter|0xABBD4228Fd397946E08656f05B3A83f8C37323f7|[https://sepolia.scrollscan.dev/address/0x591CE52f8aA7481DDeC9ad27ffe0B87b2C880B79#code](https://sepolia.scrollscan.dev/address/0x591CE52f8aA7481DDeC9ad27ffe0B87b2C880B79#code)| This is the teleporter that moves Kuala Bonds between chains using the Axelar protocol|
+|Scroll Sepolia Testnet| 534351 |Kuala Bond Reciever |0x706d554eEAFE8381abE5fCcc14A3F30A7Ed48C08|[https://sepolia.scrollscan.dev/address/0x706d554eEAFE8381abE5fCcc14A3F30A7Ed48C08#code](https://sepolia.scrollscan.dev/address/0x706d554eEAFE8381abE5fCcc14A3F30A7Ed48C08#code)| This is the teleport reciever that recieves transmitted Kuala Bonds and materialises them on chain|

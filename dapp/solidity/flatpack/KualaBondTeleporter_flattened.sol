@@ -2626,7 +2626,7 @@ pragma solidity ^0.8.20;
 contract KualaBondTeleporter is IKualaBondTeleporter, IVersion, AxelarExecutable { 
 
     string constant vname = "KUALA_BOND_TELEPORTER";
-    uint256 constant version = 2; 
+    uint256 constant version = 3; 
     address self; 
 
     uint256 index; 
@@ -2638,6 +2638,8 @@ contract KualaBondTeleporter is IKualaBondTeleporter, IVersion, AxelarExecutable
     string constant KUALA_BOND_RECIEVER_CA = "KUALA_BOND_RECIEVER"; 
     string constant KUALA_BOND_VAULT_CA = "KB_VAULT";
     string constant KUALA_BOND_ROUTING_REGISTRY_CA = "KB_ROUTING_REGISTRY";
+    string constant AXELAR_GAS_SERVICE_CA = "AXELAR_GAS_SERVICE";
+    string constant KUALA_BOND_ADMIN_CA = "KUALA_BOND_ADMIN";
 
     IOpsRegister register; 
     IKualaBondRegister iKBRegister; 
@@ -2654,11 +2656,8 @@ contract KualaBondTeleporter is IKualaBondTeleporter, IVersion, AxelarExecutable
 
     constructor(address _register, uint256 _chainId, address _gateway) AxelarExecutable(_gateway) {
         register = IOpsRegister(_register); 
-        
-        iKBRegister = IKualaBondRegister(register.getAddress(KUALA_BOND_REGISTER_CA));
-        vault = IKBVault(register.getAddress(KUALA_BOND_VAULT_CA));
-        routing = IKBRoutingRegistry(register.getAddress(KUALA_BOND_ROUTING_REGISTRY_CA)); 
-
+        gasService = IAxelarGasService(register.getAddress(AXELAR_GAS_SERVICE_CA));
+        initialize();
         self = address(this);
         chainId = _chainId; 
     }
@@ -2736,8 +2735,20 @@ contract KualaBondTeleporter is IKualaBondTeleporter, IVersion, AxelarExecutable
         chains.push(_chain);
         return true; 
     }
+    
+    function notifyChangeOfAddress() external returns (bool _recieved) {
+        require(msg.sender == register.getAddress(KUALA_BOND_ADMIN_CA),"admin only");
+        initialize(); 
+        return true; 
+    }
 
     //========================================= INTERNAL =============================================================================
+
+    function initialize() internal {
+        iKBRegister = IKualaBondRegister(register.getAddress(KUALA_BOND_REGISTER_CA));
+        vault = IKBVault(register.getAddress(KUALA_BOND_VAULT_CA));
+        routing = IKBRoutingRegistry(register.getAddress(KUALA_BOND_ROUTING_REGISTRY_CA)); 
+    }
 
     function getIndex() internal returns (uint256 _index) {
         _index = index++;

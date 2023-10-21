@@ -1319,8 +1319,10 @@ pragma solidity ^0.8.20;
 contract KualaBondReciever is AxelarExecutable, IKualaBondTeleportReciever, IVersion  { 
 
     string constant vname = "KUALA_BOND_RECIEVER"; 
-    uint256 constant version = 2;  
+    uint256 constant version = 3;  
 
+
+    string constant KUALA_BOND_ADMIN_CA = "KUALA_BOND_ADMIN";
     string constant KUALA_BOND_REGISTER_CA = "KUALA_BOND_REGISTER";
     string constant KUALA_BOND_CONTRACT_ADMIN_CA = "KUALA_BOND_ADMIN"; 
     string constant AXELAR_GAS_SERVICE_CA = "AXELAR_GAS_SERVICE";
@@ -1348,10 +1350,8 @@ contract KualaBondReciever is AxelarExecutable, IKualaBondTeleportReciever, IVer
 
     constructor(address _register, uint256 _chainId, address _gateway) AxelarExecutable(_gateway) {
         register = IOpsRegister(_register);
-        iKBRegister = IKualaBondRegister(register.getAddress(KUALA_BOND_REGISTER_CA));
         gasService = IAxelarGasService(register.getAddress(AXELAR_GAS_SERVICE_CA));
-        syntheticBondContractFactory = IKBSyntheticFactory(register.getAddress(KB_SYNTHETIC_FACTORY_CA));
-        routingRegistry = IKBRoutingRegistry(register.getAddress(KB_ROUTING_REGISTRY_CA));
+        initialize();
         chainId = _chainId; 
         self = address(this);
     } 
@@ -1372,7 +1372,20 @@ contract KualaBondReciever is AxelarExecutable, IKualaBondTeleportReciever, IVer
         return _rBonds; 
     }
 
+    function notifyChangeOfAddress() external returns (bool _recieved) {
+        require(msg.sender == register.getAddress(KUALA_BOND_ADMIN_CA),"admin only");
+        initialize(); 
+        return true; 
+    }
+
     //=============================================== INTERNAL ==========================================================================
+
+    function initialize() internal {
+        iKBRegister = IKualaBondRegister(register.getAddress(KUALA_BOND_REGISTER_CA));
+        
+        syntheticBondContractFactory = IKBSyntheticFactory(register.getAddress(KB_SYNTHETIC_FACTORY_CA));
+        routingRegistry = IKBRoutingRegistry(register.getAddress(KB_ROUTING_REGISTRY_CA));
+    }
 
     function _execute( string calldata _srcChain, /*sourceChain*/  string calldata sourceAddress, bytes calldata payload) internal override {
         require(routingRegistry.isSupportedAxelarChainName(_srcChain), string.concat("un-supported chain",_srcChain));
