@@ -28,15 +28,11 @@ The following are the chain deployments for the project
 
 The project is deployed on
 
+- Goerli Testnet (Bond & Settlement Only)
 - Scroll Sepolia Testnet
-
-- Mantle Testnet
-
 - FVM Testnet
-
 - Polygon Testnet
 
-- Goerli Testnet
   
 
 |Chain |Chain Id| Contract | Address | Verification |Description |
@@ -52,3 +48,11 @@ The project is deployed on
 |Scroll Sepolia Testnet| 534351 |Kuala Bond Register|0x5A12cb20c413aD0d73E62E8496B6fA166EeC4511|[https://sepolia.scrollscan.dev/address/0x5A12cb20c413aD0d73E62E8496B6fA166EeC4511#code](https://sepolia.scrollscan.dev/address/0x5A12cb20c413aD0d73E62E8496B6fA166EeC4511#code) | This is the register for all Kuala Bonds on the local chain, only Registered Kuala Bonds can be teleported|
 |Scroll Sepolia Testnet| 534351 |Kuala Bond Teleporter|0xABBD4228Fd397946E08656f05B3A83f8C37323f7|[https://sepolia.scrollscan.dev/address/0x591CE52f8aA7481DDeC9ad27ffe0B87b2C880B79#code](https://sepolia.scrollscan.dev/address/0x591CE52f8aA7481DDeC9ad27ffe0B87b2C880B79#code)| This is the teleporter that moves Kuala Bonds between chains using the Axelar protocol|
 |Scroll Sepolia Testnet| 534351 |Kuala Bond Reciever |0x706d554eEAFE8381abE5fCcc14A3F30A7Ed48C08|[https://sepolia.scrollscan.dev/address/0x706d554eEAFE8381abE5fCcc14A3F30A7Ed48C08#code](https://sepolia.scrollscan.dev/address/0x706d554eEAFE8381abE5fCcc14A3F30A7Ed48C08#code)| This is the teleport reciever that recieves transmitted Kuala Bonds and materialises them on chain|
+|Goerli|5|Ops Register|0xA828632816Da9d92f09B611e8fB39d57b98502e3 |[https://goerli.etherscan.io/address/0xA828632816Da9d92f09B611e8fB39d57b98502e3#code](https://goerli.etherscan.io/address/0xA828632816Da9d92f09B611e8fB39d57b98502e3#code) | Kuala Bond Operations Register on Goerli|
+|Goerli|5|KBRoutingRegistry|0x10A66F5cB6Adea40FD196031f45Eb87D119B6167|[https://goerli.etherscan.io/address/0x10A66F5cB6Adea40FD196031f45Eb87D119B6167#code](https://goerli.etherscan.io/address/0x10A66F5cB6Adea40FD196031f45Eb87D119B6167#code)||
+|Goerli|5|APE COIN - KUALA BOND Contract|0xf7d1154d9981762f3b259938480A48b54Ea5D65a|[https://goerli.etherscan.io/address/0xf7d1154d9981762f3b259938480A48b54Ea5D65a#code](https://goerli.etherscan.io/address/0xf7d1154d9981762f3b259938480A48b54Ea5D65a#code)||
+|Goerli|5|Kaula Bond Synthetic Factory|0x21BeA81284fE44E91253837A930ea3AB6681e635|[https://goerli.etherscan.io/address/0x21BeA81284fE44E91253837A930ea3AB6681e635#code](https://goerli.etherscan.io/address/0x21BeA81284fE44E91253837A930ea3AB6681e635#code)||
+|Goerli|5|Kuala Bond Register|0xbF4543DaE1990d1cC78E14e5db1a076fC63c0731|[https://goerli.etherscan.io/address/0xbF4543DaE1990d1cC78E14e5db1a076fC63c0731#code](https://goerli.etherscan.io/address/0xbF4543DaE1990d1cC78E14e5db1a076fC63c0731#code)||
+|Goerli|5|Kuala Bond Vault|0x52bEC1792B3587dE0bB40f851fB08d69E971A1bC|[https://goerli.etherscan.io/address/0x52bEC1792B3587dE0bB40f851fB08d69E971A1bC#code](https://goerli.etherscan.io/address/0x52bEC1792B3587dE0bB40f851fB08d69E971A1bC#code)||
+|Goerli|5|Kaula Bond Reciever|0x49cfDdfC3A62A38809640354a886c8f53094f507|[https://goerli.etherscan.io/address/0x49cfDdfC3A62A38809640354a886c8f53094f507#code](https://goerli.etherscan.io/address/0x49cfDdfC3A62A38809640354a886c8f53094f507#code)||
+|Goerli|5|Kuala Bond Teleporter|0xE868dD6524DfE8Ab8AE45537Ad0647259C87D84c|[https://goerli.etherscan.io/address/0xE868dD6524DfE8Ab8AE45537Ad0647259C87D84c#code](https://goerli.etherscan.io/address/0xE868dD6524DfE8Ab8AE45537Ad0647259C87D84c#code)||
